@@ -20,19 +20,21 @@ Text Translator is a simple web application that allows users to translate text 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/text-translator.git
+git clone [https://github.com/your-username/text-translator.git](https://github.com/DevClube/text_translator.git)
 cd text-translator
-Install dependencies:
+
+### Install dependencies:
+
 bash
 Copy code
 pip install -r requirements.txt
 Run the application:
-bash
+```bash
 Copy code
 python app.py
 The application will be running at http://localhost:5000.
 
-Usage
+### Usage
 Open your web browser and go to http://localhost:5000.
 Enter the text you want to translate in the textarea.
 Select the target language from the dropdown.
@@ -46,12 +48,8 @@ Create a new branch: git checkout -b feature/new-feature.
 Commit your changes: git commit -m 'Add a new feature'.
 Push to the branch: git push origin feature/new-feature.
 Submit a pull request.
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
 
-Acknowledgments
+
+### Acknowledgments
 TranslatePy API for language translation.
-vbnet
-Copy code
 
-Make sure to replace placeholders like `your-username` and customize sections as needed. This template provides a starting point, and you can add more details based on the specifics of your project.

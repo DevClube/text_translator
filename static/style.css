@@ -1,0 +1,64 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #000; /* Default background color */
+	color: #333; /* Default text color */
+	transition: background-color 0.5s, color 0.5s;
+}
+
+header {
+	background-color: #333;
+	color: #fff;
+	padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	transition: background-color 0.5s, color 0.5s;
+}
+
+#logo {
+	font-size: 1.5em;
+}
+
+
+main {
+	padding: 20px;
+}
+
+#languageDropdown {
+	margin-bottom: 10px;
+}
+
+#wordCount {
+	margin-bottom: 10px;
+}
+main {
+    margin: 0 auto; /* Center the main element */
+    max-width: 70%; /* Limit the width to 70% of the page */
+    padding: 20px;
+}
+
+#translateBtn {
+	background-color: #4CAF50;
+	color: #fff;
+	padding: 8px 16px;
+	border: none;
+	cursor: pointer;
+}
+
+#translationResult {
+	margin-top: 10px;
+	padding: 10px;
+	border: 1px solid #ddd;
+}
+
+#copyBtn {
+	background-color: #007bff;
+	color: #fff;
+	padding: 8px 16px;
+	border: none;
+	cursor: pointer;
+	margin-top: 10px;
+}
+

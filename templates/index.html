@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Text Translator</title>
+</head>
+<body>
+
+     <header>
+        <div id="logo">Translaty</div>
+
+    </header>
+
+    <main class="card">
+        <div id="languageDropdown" class="form-group">
+            <label for="language">Select Language:</label>
+            <select id="language" class="form-control">
+
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="textInput">Enter text (max 100 words):</label>
+            <textarea id="textInput" class="form-control" rows="5" maxlength="500" oninput="updateWordCount()"></textarea>
+            <p id="wordCount">Word Count: 0</p>
+        </div>
+
+        <button id="translateBtn" class="btn btn-success" onclick="translateText()">Translate</button>
+
+        <div id="translationResult"></div>
+
+        <button id="copyBtn" class="btn btn-primary" onclick="copyToClipboard()">Copy Result</button>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        document.querySelector('header').classList.toggle('dark-mode');
+    }
+
+    function updateWordCount() {
+        const textInput = document.getElementById('textInput');
+        const wordCount = document.getElementById('wordCount');
+        const words = textInput.value.trim().split(/\s+/);
+        wordCount.textContent = `Word Count: ${words.length}`;
+    }
+
+    function translateText() {
+        const textInput = document.getElementById('textInput');
+        const languageDropdown = document.getElementById('language');
+
+        const data = new FormData();
+        data.append('textToTranslate', textInput.value);
+        data.append('targetLanguage', languageDropdown.value);
+
+        fetch('/translate', {
+            method: 'POST',
+            body: data
+        })
+        .then(response => response.json())
+        .then(data => {
+            const translationResult = document.getElementById('translationResult');
+            translationResult.textContent = `${data.translatedText}`;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function copyToClipboard() {
+        const translationResult = document.getElementById('translationResult');
+        const tempTextArea = document.createElement('textarea');
+        tempTextArea.value = translationResult.textContent;
+        document.body.appendChild(tempTextArea);
+        tempTextArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempTextArea);
+        alert('Result copied to clipboard!');
+    }
+    var languageDropdown = document.getElementById('language');
+
+    var languageNames = {
+        'af': 'Afrikaans',
+        'am': 'Amharic',
+        'ar': 'Arabic',
+        'az': 'Azerbaijani',
+        'be': 'Belarusian',
+        'bg': 'Bulgarian',
+        'bn': 'Bengali',
+        'bs': 'Bosnian',
+        'ca': 'Catalan',
+        'ceb': 'Cebuano',
+        'co': 'Corsican',
+        'cs': 'Czech',
+        'cy': 'Welsh',
+        'da': 'Danish',
+        'de': 'German',
+        'el': 'Greek',
+        'eo': 'Esperanto',
+        'es': 'Spanish',
+        'et': 'Estonian',
+        'eu': 'Basque',
+        'fa': 'Persian',
+        'fi': 'Finnish',
+        'fr': 'French',
+        'fy': 'Frisian',
+        'ga': 'Irish',
+        'gd': 'Scottish Gaelic',
+        'gl': 'Galician',
+        'gu': 'Gujarati',
+        'ha': 'Hausa',
+        'haw': 'Hawaiian',
+        'hi': 'Hindi',
+        'hmn': 'Hmong',
+        'hr': 'Croatian',
+        'ht': 'Haitian Creole',
+        'hu': 'Hungarian',
+        'hy': 'Armenian',
+        'id': 'Indonesian',
+        'ig': 'Igbo',
+    'is': 'Icelandic',
+    'it': 'Italian',
+    'he': 'Hebrew',
+    'ja': 'Japanese',
+    'jv': 'Javanese',
+    'ka': 'Georgian',
+    'kk': 'Kazakh',
+    'km': 'Khmer',
+    'kn': 'Kannada',
+    'ko': 'Korean',
+    'ku': 'Kurdish',
+    'ky': 'Kyrgyz',
+    'la': 'Latin',
+    'lb': 'Luxembourgish',
+    'lo': 'Lao',
+    'lt': 'Lithuanian',
+    'lv': 'Latvian',
+    'mg': 'Malagasy',
+    'mi': 'Maori',
+    'mk': 'Macedonian',
+    'ml': 'Malayalam',
+    'mn': 'Mongolian',
+    'mr': 'Marathi',
+    'ms': 'Malay',
+    'mt': 'Maltese',
+    'my': 'Burmese',
+    'ne': 'Nepali',
+    'nl': 'Dutch',
+    'no': 'Norwegian',
+    'ny': 'Chichewa',
+    'or': 'Odia',
+    'pa': 'Punjabi',
+    'pl': 'Polish',
+    'ps': 'Pashto',
+    'pt': 'Portuguese',
+    'ro': 'Romanian',
+    'ru': 'Russian',
+    'sd': 'Sindhi',
+    'si': 'Sinhala',
+    'sk': 'Slovak',
+    'sl': 'Slovenian',
+    'sm': 'Samoan',
+    'sn': 'Shona',
+    'so': 'Somali',
+    'sq': 'Albanian',
+    'sr': 'Serbian',
+    'st': 'Sesotho',
+    'su': 'Sundanese',
+    'sv': 'Swedish',
+    'sw': 'Swahili',
+    'ta': 'Tamil',
+    'te': 'Telugu',
+    'tg': 'Tajik',
+    'th': 'Thai',
+    'tl': 'Filipino',
+    'tr': 'Turkish',
+    'ug': 'Uyghur',
+    'uk': 'Ukrainian',
+    'ur': 'Urdu',
+    'uz': 'Uzbek',
+    'vi': 'Vietnamese',
+    'xh': 'Xhosa',
+    'yi': 'Yiddish',
+    'yo': 'Yoruba',
+    'zh': 'Chinese',
+    'zu': 'Zulu'
+    };
+
+    for (var code in languageNames) {
+        var option = document.createElement('option');
+        option.value = code;
+        option.textContent = languageNames[code];
+        languageDropdown.appendChild(option);
+    }
+</script>
+
+
+</body>
+</html>
